@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Thymeleaf Demo</title>
+    <link rel="stylesheet"
+          th:href="@{/css/demo.сss}"/>
+</head>
+
+<body>
+<div class="container">
+
+    <h3>User Directory</h3>
+
+    <a th:href="@{/showFormForAdd}"
+       class="btn btn-primary btn-sm mb-3">
+        Add User
+    </a>
+    <table class="table table-bordered table-striped">
+        <thead class="thread-dark">
+        <tr>
+            <th>User id</th>
+            <th>User Uuid</th>
+            <th>User email</th>
+            <th>Registration Time</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="tempUser : ${users}">
+            <td th:text="${tempUser.id}"/>
+            <td th:text="${tempUser.uuid}"/>
+            <td th:text="${tempUser.email}"/>
+            <td th:text="${tempUser.createTimestamp}"/>
+            <td>
+                <a th:href="@{/showFormForUpdate(userId=${tempUser.id})}"
+                class="btn btn-info btn-sm">
+
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
