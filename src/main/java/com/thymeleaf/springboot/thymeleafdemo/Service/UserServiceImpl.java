@@ -37,11 +37,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(PaymentUser user) {
-
+    repository.save(user);
     }
 
     @Override
     public void delete(int id) {
+        repository.deleteById(id);
 
     }
 }

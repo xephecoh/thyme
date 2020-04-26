@@ -18,9 +18,9 @@
 <div class="container">
     <h3>User Directory</h3>
     <p class="h4 mb">Save user</p>
-    <form action="#" th:action="{/save}"
+    <form action="#" th:action="@{/save}"
                      th:object="${user}" METHOD="POST">
-        <input type="hidden" th:field="{id}"/>
+        <input type="hidden" th:field="*{id}"/>
         <input type="text" th:field="*{uuid}"
                class="form-control mb-4 col-4" placeholder="Uuid">
         <input type="text" th:field="*{email}"

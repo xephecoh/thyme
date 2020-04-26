@@ -64,7 +64,13 @@ public class DemoController {
     }
     @PostMapping("/save")
     public String saveEmployee(@ModelAttribute("user") PaymentUser user){
+        user.setCreateTimestamp((int)System.currentTimeMillis());
         service.save(user);
+        return "redirect:/paymentsUsers";
+    }
+    @GetMapping("/delete")
+    public String delete(@RequestParam("userId") int theId){
+        service.delete(theId);
         return "redirect:/paymentsUsers";
     }
 }
