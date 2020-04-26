@@ -24,22 +24,6 @@ public class DemoController {
         this.service = service;
     }
 
-    private List<Employee> list;
-
-    @PostConstruct
-    public void loadList() {
-        list = new ArrayList<>();
-        list.add(new Employee("John", " Smith", "JavaDeveloper", 7200, "johnSmith@gmail.com"));
-        list.add(new Employee("Natalie", " Bush", "HR", 720, "natalieBush@gmail.com"));
-        list.add(new Employee("Igor", " Alexandrov", "FrontEnd", 7300, "igorAlexandrov@gmail.com"));
-    }
-
-    @GetMapping("/employeeList")
-    public String getList(Model model) {
-        model.addAttribute("employees", list);
-        return "employees";
-    }
-
     @GetMapping("/paymentsUsers")
     public String getUsersList(Model model) {
         List<PaymentUser> users = service.findAll();
@@ -58,13 +42,11 @@ public class DemoController {
                                     Model theModel){
         PaymentUser user = service.findById(theID);
         theModel.addAttribute("user",user);
-
         return "users/userForm";
-
     }
     @PostMapping("/save")
     public String saveEmployee(@ModelAttribute("user") PaymentUser user){
-        user.setCreateTimestamp((int)System.currentTimeMillis());
+        user.setCreateTimestamp((int)(System.currentTimeMillis()/1000));
         service.save(user);
         return "redirect:/paymentsUsers";
     }
