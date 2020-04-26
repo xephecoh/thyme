@@ -31,6 +31,7 @@
             <th>User Uuid</th>
             <th>User email</th>
             <th>Registration Time</th>
+            <th>Registration Date</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -41,6 +42,7 @@
             <td th:text="${tempUser.uuid}"/>
             <td th:text="${tempUser.email}"/>
             <td th:text="${tempUser.createTimestamp}"/>
+            <td th:text="${#dates.format(new java.util.Date(tempUser.createTimestamp),'dd/MM/yyyy - HH:mm')}"/>
             <td>
                 <a th:href="@{/showFormForUpdate(userId=${tempUser.id})}"
                    class="btn btn-info btn-sm">
