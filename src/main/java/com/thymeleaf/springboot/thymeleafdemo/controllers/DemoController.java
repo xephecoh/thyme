@@ -37,30 +37,32 @@ public class DemoController {
         theModel.addAttribute("user", user);
         return "users/userForm";
     }
-    @GetMapping ("/showFormForUpdate")
+
+    @GetMapping("/showFormForUpdate")
     public String showFormForUpdate(@RequestParam("userId") int theID,
-                                    Model theModel){
+                                    Model theModel) {
         PaymentUser user = service.findById(theID);
-        theModel.addAttribute("user",user);
+        theModel.addAttribute("user", user);
         return "users/userForm";
     }
+
     @PostMapping("/save")
-    public String saveEmployee(@ModelAttribute("user") PaymentUser user){
-        user.setCreateTimestamp((int)(System.currentTimeMillis()/1000));
+    public String saveEmployee(@ModelAttribute("user") PaymentUser user) {
+        user.setCreateTimestamp((int) (System.currentTimeMillis() / 1000));
         service.save(user);
         return "redirect:/paymentsUsers";
     }
+
     @GetMapping("/delete")
-    public String delete(@RequestParam("userId") int theId){
+    public String delete(@RequestParam("userId") int theId) {
         service.delete(theId);
         return "redirect:/paymentsUsers";
     }
-    @PostMapping("/search")
-    public String search(@RequestParam("email") String email,Model model){
 
-       List<PaymentUser> oneUser =service.findByEmail(email);
-       oneUser.get(0);
-        model.addAttribute("oneUser",oneUser);
+    @PostMapping("/search")
+    public String search(@RequestParam("email") String email, Model model) {
+        List<PaymentUser> oneUser = service.findByEmail(email);
+        model.addAttribute("oneUser", oneUser);
         return "users/User";
     }
 

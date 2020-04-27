@@ -1,8 +1,6 @@
 package com.thymeleaf.springboot.thymeleafdemo.Service;
 
 import com.thymeleaf.springboot.thymeleafdemo.model.PaymentUser;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 public interface UserService {
