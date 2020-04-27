@@ -43,6 +43,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(int id) {
         repository.deleteById(id);
+    }
 
+    @Override
+    public List<PaymentUser> findByEmail(String email) {
+       List<PaymentUser> user = repository.findByEmail(email);
+       return user;
     }
 }

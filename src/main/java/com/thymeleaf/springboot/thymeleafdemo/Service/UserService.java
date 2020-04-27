@@ -10,4 +10,5 @@ public interface UserService {
     public PaymentUser findById(int id);
     public void save(PaymentUser user);
     public void delete(int id);
+    public List<PaymentUser> findByEmail(String email);
 }

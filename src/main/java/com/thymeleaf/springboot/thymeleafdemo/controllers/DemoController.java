@@ -55,4 +55,13 @@ public class DemoController {
         service.delete(theId);
         return "redirect:/paymentsUsers";
     }
+    @PostMapping("/search")
+    public String search(@RequestParam("email") String email,Model model){
+
+       List<PaymentUser> oneUser =service.findByEmail(email);
+       oneUser.get(0);
+        model.addAttribute("oneUser",oneUser);
+        return "users/User";
+    }
+
 }

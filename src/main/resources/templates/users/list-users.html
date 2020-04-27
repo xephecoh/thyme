@@ -24,6 +24,13 @@
        class="btn btn-primary btn-sm mb-3">
         Add User
     </a>
+    <form action="#" th:action="@{/search}"
+          th:object="${email}" METHOD="POST">
+        <input type="text" name="email"
+               class="form-control mb-4 col-4" placeholder="Enter email">
+        <button type="submit" class="btn btn-info col-2">Search</button>
+    </form>
+
     <table class="table table-bordered table-striped">
         <thead class="thread-dark">
         <tr>
