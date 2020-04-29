@@ -31,7 +31,7 @@
             <td th:text="${oneUser1.id}"/>
             <td th:text="${oneUser1.uuid}"/>
             <td th:text="${oneUser1.email}"/>
-            <td th:text="${#dates.format(new java.util.Date(oneUser1.createTimestamp),'dd/MM/yyyy - HH:mm')}"/>
+            <td th:text="${oneUser1.createTimestamp}"/>
         </tr>
         </tbody>
     </table>

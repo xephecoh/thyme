@@ -61,7 +61,7 @@ public class DemoController {
 
     @PostMapping("/search")
     public String search(@RequestParam("email") String email, Model model) {
-        List<PaymentUser> oneUser = service.findByEmail(email);
+        List<PaymentUser> oneUser = service.findByEmail(email.trim());
         model.addAttribute("oneUser", oneUser);
         return "users/User";
     }
