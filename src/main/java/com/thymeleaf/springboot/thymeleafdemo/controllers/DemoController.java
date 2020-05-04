@@ -1,18 +1,13 @@
 package com.thymeleaf.springboot.thymeleafdemo.controllers;
 
 import com.thymeleaf.springboot.thymeleafdemo.Service.UserService;
-import com.thymeleaf.springboot.thymeleafdemo.model.Employee;
 import com.thymeleaf.springboot.thymeleafdemo.model.PaymentUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -27,6 +22,7 @@ public class DemoController {
     @GetMapping("/paymentsUsers")
     public String getUsersList(Model model) {
         List<PaymentUser> users = service.findAll();
+        users.stream().forEach(e -> e.setDate(new Date(e.getCreateTimestamp()*1000)));
         model.addAttribute("users", users);
         return "users/list-users";
     }
@@ -64,6 +60,11 @@ public class DemoController {
         List<PaymentUser> oneUser = service.findByEmail(email.trim());
         model.addAttribute("oneUser", oneUser);
         return "users/User";
+    }
+
+    @RequestMapping("/login")
+    public String showMyLoginPage() {
+        return "users/login";
     }
 
 }

@@ -1,6 +1,7 @@
 package com.thymeleaf.springboot.thymeleafdemo.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name="payments_users")
@@ -18,12 +19,14 @@ public class PaymentUser {
     private String email;
 
     @Column(name="create_timestamp")
-    private int createTimestamp;
+    private long createTimestamp;
+
+    private Date date;
 
     public PaymentUser() {
     }
 
-    public PaymentUser(int id,String uuid,String email,int createTimeStamp) {
+    public PaymentUser(int id,String uuid,String email,long createTimeStamp) {
         this.id=id;
         this.uuid=uuid;
         this.email=email;
@@ -57,11 +60,19 @@ public class PaymentUser {
         this.email = email;
     }
 
-    public int getCreateTimestamp() {
+    public long getCreateTimestamp() {
         return createTimestamp;
     }
 
-    public void setCreateTimestamp(int createTimestamp) {
+    public void setCreateTimestamp(long createTimestamp) {
         this.createTimestamp = createTimestamp;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

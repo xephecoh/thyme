@@ -11,26 +11,39 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <title>Thymeleaf Demo</title>
-    <link rel="stylesheet"
-          th:href="@{/css/demo.сss}"/>
 </head>
 
 <body>
+
 <div class="container">
+    <div class="row">
+        <div class="col-2">
+            <h3>Users Directory</h3>
+        </div>
+        <div class="col-5">
+            <form action="#" th:action="@{/search}" th:object="${email}" METHOD="POST">
+                <div>
+                    <input type="text" name="email" style="max-width:none !important" class="form-control mb-4 col-4" placeholder="Search by email">
+                    <input type="submit" class="btn btn-info col-2" value="Search" style="display:none;">
+                </div>
+            </form>
+        </div>
+        <div class="col-5">
+            <form action="#" th:action="@{/logout}" METHOD="POST">
+                <button type="submit" class="btn btn-info col-2">Logout</button>
+            </form>
+        </div>
+    </div>
+</div>
 
-    <h3>User Directory</h3>
 
-    <a th:href="@{/showFormForAdd}"
-       class="btn btn-primary btn-sm mb-3">
+</br>
+
+<div class="container">
+    <a th:href="@{/showFormForAdd}" class="btn btn-primary btn-sm mb-3">
         Add User
     </a>
-    <form action="#" th:action="@{/search}"
-          th:object="${email}" METHOD="POST">
-        <input type="text" name="email"
-               class="form-control mb-4 col-4" placeholder="Enter email">
-        <button type="submit" class="btn btn-info col-2">Search</button>
-    </form>
-
+    </br>
     <table class="table table-bordered table-striped">
         <thead class="thread-dark">
         <tr>
@@ -49,8 +62,7 @@
             <td th:text="${tempUser.uuid}"/>
             <td th:text="${tempUser.email}"/>
             <td th:text="${tempUser.createTimestamp}"/>
-            <td th:text="${tempUser.createTimestamp}"/>
-            <!--<td th:text="${#dates.format(new java.util.Date(tempUser?.createTimestamp),'dd/MM/yyyy - HH:mm')}"/> -->
+            <td th:text="${#dates.format(tempUser.date)}"/>
             <td>
                 <a th:href="@{/showFormForUpdate(userId=${tempUser.id})}"
                    class="btn btn-info btn-sm">
