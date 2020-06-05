@@ -21,6 +21,7 @@ public class PaymentUser {
     @Column(name="create_timestamp")
     private long createTimestamp;
 
+
     private Date date;
 
     public PaymentUser() {

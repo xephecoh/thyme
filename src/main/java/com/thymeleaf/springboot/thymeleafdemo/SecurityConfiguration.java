@@ -18,25 +18,26 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .password("tradelize")
                 .roles("ADMIN");
     }
+
     @Bean
-    public PasswordEncoder getPasswordEncoder(){
+    public PasswordEncoder getPasswordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception{
+    protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/**").hasRole("ADMIN")
                 .and().formLogin();
 
         http.authorizeRequests()
-                  .anyRequest().authenticated()
+                .anyRequest().authenticated()
                 .and()
-                  .formLogin()
-                  .loginPage("/login")
-                  .permitAll()
-                  .defaultSuccessUrl("/paymentsUsers")
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .defaultSuccessUrl("/paymentsUsers")
                 .and()
-                  .logout().permitAll().logoutSuccessUrl("/login?logout");
+                .logout().permitAll().logoutSuccessUrl("/login?logout");
     }
 }

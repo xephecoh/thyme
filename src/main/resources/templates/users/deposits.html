@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Thymeleaf Demo</title>
+</head>
+<body>
+
+<table class="table table-bordered table-striped">
+    <thead class="thread-dark">
+    <tr>
+        <th>User id</th>
+        <th>User Uuid</th>
+        <th>User email</th>
+        <th>Registration Time</th>
+        <th>Registration Date</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="tempDeposit : ${deposits}">
+        <td th:text="${tempDeposit.user.uuid}"/>
+        <td th:text="${tempDeposit.currency}"/>
+        <td th:text="${tempDeposit.new_amount}"/>
+        <td th:text="${tempDeposit.createTimestamp}"/>
+        <td>
+            <a th:href="@{/showFormForUpdate(userId=${tempDeposit.id})}"
+               class="btn btn-info btn-sm">
+                Update
+            </a>
+            <a th:href="@{/delete(userId=${tempDeposit.id})}"
+               class="btn btn-danger btn-sm"
+               onclick="if (!confirm('Are you sure you want to delete this user?')) return false">
+                Delete
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+
+
+</html>

@@ -1,6 +1,8 @@
 package com.thymeleaf.springboot.thymeleafdemo.controllers;
 
+import com.thymeleaf.springboot.thymeleafdemo.Service.DepositService;
 import com.thymeleaf.springboot.thymeleafdemo.Service.UserService;
+import com.thymeleaf.springboot.thymeleafdemo.model.PaymentDeposit;
 import com.thymeleaf.springboot.thymeleafdemo.model.PaymentUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,11 +15,21 @@ import java.util.List;
 @Controller
 public class DemoController {
     private UserService service;
+    private DepositService deposit;
 
     @Autowired
-    public DemoController(UserService service) {
+    public DemoController(UserService service,DepositService deposit) {
         this.service = service;
+        this.deposit = deposit;
     }
+
+    @GetMapping("/paymentsDeposits")
+    public String getDepositList(Model model){
+        List<PaymentDeposit> deposits=deposit.findAll();
+        model.addAttribute("deposits",deposits);
+        return "users/deposits";
+    }
+
 
     @GetMapping("/paymentsUsers")
     public String getUsersList(Model model) {
