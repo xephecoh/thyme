@@ -9,13 +9,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class DemoController {
     private UserService service;
     private DepositService deposit;
+    private List<PaymentUser> users;
 
     @Autowired
     public DemoController(UserService service,DepositService deposit) {
@@ -39,6 +42,24 @@ public class DemoController {
         return "users/list-users";
     }
 
+
+    @GetMapping("/sortedById")
+    public String getUsersListById(Model model) {
+        List<PaymentUser> users1 = service.findAll();
+        users1.stream().forEach(e -> e.setDate(new Date(e.getCreateTimestamp()*1000)));
+        List<PaymentUser> users =users1.stream().sorted(Comparator.comparingInt(PaymentUser::getId)).collect(Collectors.toList());
+        model.addAttribute("users", users);
+        return "users/list-users";
+    }
+
+    @GetMapping("/sortedByEmail")
+    public String getUsersListByEmail(Model model) {
+        List<PaymentUser> users1 = service.findAll();
+        users1.stream().forEach(e -> e.setDate(new Date(e.getCreateTimestamp()*1000)));
+        List<PaymentUser> users =users1.stream().sorted(Comparator.comparing(PaymentUser::getEmail)).collect(Collectors.toList());
+        model.addAttribute("users", users);
+        return "users/list-users";
+    }
     @GetMapping("/showFormForAdd")
     public String showFormForAdd(Model theModel) {
         PaymentUser user = new PaymentUser();
