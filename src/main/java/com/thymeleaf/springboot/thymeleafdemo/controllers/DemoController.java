@@ -21,23 +21,23 @@ public class DemoController {
     private List<PaymentUser> users;
 
     @Autowired
-    public DemoController(UserService service,DepositService deposit) {
+    public DemoController(UserService service, DepositService deposit) {
         this.service = service;
         this.deposit = deposit;
     }
 
     @GetMapping("/paymentsDeposits")
-    public String getDepositList(Model model){
-        List<PaymentDeposit> deposits=deposit.findAll();
-        model.addAttribute("deposits",deposits);
+    public String getDepositList(Model model) {
+        List<PaymentDeposit> deposits = deposit.findAll();
+        model.addAttribute("deposits", deposits);
         return "users/deposits";
     }
 
 
     @GetMapping("/paymentsUsers")
     public String getUsersList(Model model) {
-        List<PaymentUser> users = service.findAll();
-        users.stream().forEach(e -> e.setDate(new Date(e.getCreateTimestamp()*1000)));
+        users = service.findAll();
+        users.stream().forEach(e -> e.setDate(new Date(e.getCreateTimestamp() * 1000)));
         model.addAttribute("users", users);
         return "users/list-users";
     }
@@ -45,21 +45,22 @@ public class DemoController {
 
     @GetMapping("/sortedById")
     public String getUsersListById(Model model) {
-        List<PaymentUser> users1 = service.findAll();
-        users1.stream().forEach(e -> e.setDate(new Date(e.getCreateTimestamp()*1000)));
-        List<PaymentUser> users =users1.stream().sorted(Comparator.comparingInt(PaymentUser::getId)).collect(Collectors.toList());
-        model.addAttribute("users", users);
+
+        users.stream().forEach(e -> e.setDate(new Date(e.getCreateTimestamp() * 1000)));
+        List<PaymentUser> users1 = users.stream().sorted(Comparator.comparingInt(PaymentUser::getId)).collect(Collectors.toList());
+        model.addAttribute("users", users1);
         return "users/list-users";
     }
 
     @GetMapping("/sortedByEmail")
     public String getUsersListByEmail(Model model) {
-        List<PaymentUser> users1 = service.findAll();
-        users1.stream().forEach(e -> e.setDate(new Date(e.getCreateTimestamp()*1000)));
-        List<PaymentUser> users =users1.stream().sorted(Comparator.comparing(PaymentUser::getEmail)).collect(Collectors.toList());
-        model.addAttribute("users", users);
+        users = service.findAll();
+        users.stream().forEach(e -> e.setDate(new Date(e.getCreateTimestamp() * 1000)));
+        List<PaymentUser> users1 = users.stream().sorted(Comparator.comparing(PaymentUser::getEmail)).collect(Collectors.toList());
+        model.addAttribute("users", users1);
         return "users/list-users";
     }
+
     @GetMapping("/showFormForAdd")
     public String showFormForAdd(Model theModel) {
         PaymentUser user = new PaymentUser();
@@ -95,9 +96,9 @@ public class DemoController {
         return "users/User";
     }
 
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String showMyLoginPage() {
-        return "users/login";
+        return "users/login1";
     }
 
 }
